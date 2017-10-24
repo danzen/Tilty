@@ -1,0 +1,331 @@
+
+MOBILE PUBLISHING HCJ AS APPS
+
+You can bundle up your HTML/CSS/JS files as mobile apps on all major platforms.
+
+We will use Adobe PhoneGap to do this which will make native app shells and present our content in a WebView.
+
+This article is pretty good at explaining but tells you more than you need to know (as explained below).
+
+http://phonegap.com/2012/05/02/phonegap-explained-visually/
+
+This long set of instructions are the steps to get your code onto a phone as an app.
+
+We will use iOS as a demonstration because it is the most complex.  Android is similar but easier.
+
+
+GITHUB AND PHONEGAP
+
+Git and PhoneGap are command line tools.
+
+We will not be using the command line but rather the Windows GitHub app and the online PhoneGap Build.
+
+PhoneGap build requires you to have your code on GitHub.
+
+
+GITHUB WINDOWS APP
+
+1. Download and instal GITHUB for Windows https://windows.github.com/
+
+2. If you have a GitHub account, sign in or if not then sign up to create an account
+
+3. We will make a repository after we look at PhoneGap Build
+
+
+PHONEGAP BUILD
+
+4. Go to PhoneGap Build: https://build.phonegap.com/apps
+
+5. If you have an Adobe account, sign in or if not then sign up to create an account
+
+6. Read about the structure of your files and the config.xml under the Docs section
+
+
+
+GITHUB REPOSITORY
+
+7. In the GitHub desktop app use the + to create a new repository (public) - choose its name and location
+
+8. Right click on the name and open in Windows explorer (or find the directory on your computer)
+
+9. Create a www folder inside - put a js folder inside the www folder and add createjs and zimjs files (keep local)
+
+10. Put your index.html in the www folder along with any other files
+
+11. Copy the config.xml found below to your www folder at the same level as your index.html
+
+https://github.com/phonegap/phonegap-start/tree/master/www
+
+12. Adjust the app id (com.yoursite.app), version, app name, etc. and remove the plugins that we do not need (all of them)
+
+13. Grab the res folder too as it has samples of icons and splashscreen sizes
+
+14. You can copy new images into these and keep the same links in the config.xml file
+
+15. Test your index and javascript files, etc. in a browser
+
+
+COMMIT TO GITHUB
+
+16. In the GitHub app, press the UNCOMMITTED CHANGES Show Arrow and type in a title and description (First App... whatever)
+
+17. Press COMMIT TO MASTER and then the SYNC icon up top right (to send to GitHub online)
+
+18. You can view the COMMIT on GitHub - it just means your files are there in the repository
+
+
+PHONEGAP BUILD APP
+
+19. On the PhoneGap Build site, specify your GitHub account under the account settings top right
+
+20. Go back to the main page and Make App - Specify the GitHub Repository and Pull from .git repository
+
+21. To complete the process we have to have signing keys for each platform
+
+22. We will look at signing keys and then come back to PhoneGap Build
+
+
+
+GETTING KEY FILES FROM APPLE iOS DEVELOPER SITE
+
+https://developer.apple.com/devcenter/ios/
+
+23. Become a developer (or participate in an Apple University program)
+
+24. There is a "Certificates, Identifiers & Profiles" portal where you can get files needed for getting an app onto a phone
+
+25. There are basically two steps:  Develop and Distribute.
+
+26. See the Apple Distribution Diagram by Dan Zen
+
+27. You need a Development Certificate and Development Provisioning Profile to test on device
+
+28. You will also need to know your UDID (device ID) which can be found as follows:
+
+29. Attach your device to your computer and in iTunes, go to your device and click on your serial number
+
+30. It will switch to your UDID. Use CTRL C to copy it (what to do with it comes below)
+
+31. You need a Distribution Certificate and Distribution Provisioning Profile to distribute in the App Store
+
+32. To distribute you must pay $99 a year to Apple (for class, don't worry about these last two)
+
+
+
+APPLE UNIVERSITY
+
+33. Apple provides institutions a way for people to develop and test for free (not distribute)
+
+// steps specific to our University have been removed
+
+43. You cannot distribute to the store
+
+
+NON APPLE UNIVERSITY
+
+44. When doing this for real you will go to the "Certificates, Identifiers & Profiles" portal
+
+45. You will need to make a local Signing Certificate that binds to your computer (see Apple Files Part 1 section)
+
+46. Create your Development Certificate after you have your Signing Certificate
+
+47. For both developing and distributing you need to make an App ID
+
+48. For developing you need register a device based on your UDID (see section above)
+
+49. A Development Provisioning Profile combines the Development Certificate, Device and App ID
+
+50. You then put this profile onto your device through iTunes (see Apple Device section)
+
+
+APPLE FILES
+
+51. We need to make a Signing Certificate for Apple to be able to obtain a Development or Distribution Certificate.
+
+52. Here are the instructions from Adobe:
+
+53. On Mac OS, you can use the Keychain Access application to generate a code signing request. The Keychain Access application is in the Utilities subdirectory of the Applications directory. On the Keychain Access menu, select Certificate Assistant > Request a Certificate from a Certificate Authority.
+
+    1. Open Keychain Access.
+
+    2. On the Keychain Access menu, select Preferences.
+
+    3. In the Preferences dialog box, click Certificates. Then set Online Certificate Status Protocol and Certificate Revocation List to Off. Close the dialog box.
+
+    4. On the Keychain Access menu, select Certificate Assistant > Request a Certificate from a Certificate Authority.
+
+    5. Enter the e-mail address and name that matches your iPhone developer account ID. Do not enter a CA e-mail address. Select Request is Saved to Disk and then click the Continue button.
+
+    6. Save the file (CertificateSigningRequest.certSigningRequest).
+
+    7. Upload the CSR file to Apple at the iPhone developer site. (See “Apply for an iPhone developer certificate and create a provisioning profile”.)
+
+54. Generate a certificate signing request on Windows
+
+55. For Windows developers, first, you create a certificate signing request (a CSR file) using OpenSSL:
+
+    1. Install OpenSSL on your Windows computer.
+    Go to http://www.openssl.org/communities/binaries.html and choose one:
+    like: https://slproweb.com/products/Win32OpenSSL.html
+    Use the full install, not the light.
+    There was an option where I stored stuff in openSSL folder not the Windows directories.
+
+    You may also need to install the Visual C++ 2008 Redistributable files, listed on the Open SSL download page. (You do not need Visual C++ installed on your computer.)
+
+    (At one point, I also had to copy the openssl.cfg file from the include/openssl/ folder to the bin folder to make this run)
+    (Then recently, I had to copy the openssl.cnf file (from bin/cnf/) to the Program Files (x86) > Common Files > SSL directory (and make the SSL directory))
+
+    2. Open a Windows command session, and CD to the OpenSSL bin directory (such as c:\OpenSSL\bin\).
+
+    (or browse to the OpenSSL folder and SHIFT right click on the bin directory - then choose "Open Command Window Here"
+
+    3. Create the private key by entering the following in the command line: (copy and paste using right click menu)
+
+    set RANDFILE=.rnd
+    openssl genrsa -out mykey.key 2048
+
+    Save this private key file. You will use it and the password you make later.
+
+    When using OpenSSL, do not ignore error messages. If OpenSSL generates an error message, it may still output files. However, those files may not be usable. If you see errors, check your syntax and run the command again.
+
+    4. Create the CSR file by entering the following in the command line:
+
+    openssl req -new -key mykey.key -out CertificateSigningRequest.certSigningRequest  -subj "/emailAddress=yourAddress@example.com, CN=John Doe, C=US"
+
+    Replace the e-mail address, CN (certificate name), and C (country) values with your own.
+
+    5. Use the certSigningRequest file when asked as setting up Certificates on the iOS Development site
+
+
+APPLE FILES PART 2
+
+56. We also will have to convert the Developer and Distribution (if needed) Certificates for PhoneGap Build
+
+57. PhoneGap (and Adobe AIR) use P12 files so here is the Adobe instructions:
+
+
+59. Convert the iPhone developer certificate to a P12 file on Mac OS
+
+60. Once you have downloaded the Apple iPhone certificate from Apple, export it to the P12 certificate format. To do this on Mac® OS:
+
+    1. Open the Keychain Access application (in the Applications/Utilities folder).
+
+    2. If you have not already added the certificate to Keychain, select File > Import. Then navigate to the certificate file (the .cer file) you obtained from Apple.
+
+    3. Select the Keys category in Keychain Access.
+
+    4. Select the private key associated with your iPhone Development Certificate.
+
+    The private key is identified by the iPhone Developer: <First Name> <Last Name> public certificate that is paired with it.
+
+    5. Select File > Export Items.
+
+    6. Save your key in the Personal Information Exchange (.p12) file format.
+
+    7. You will be prompted to create a password that is used when you attempt to import this key on another computer.
+
+61. Convert an Apple developer certificate to a P12 file on Windows
+
+62. To develop iPhone applications with PhoneGap Build, you must use a P12 certificate file. You generate this certificate based on the Apple iPhone developer certificate file you receive from Apple.
+
+    1. Convert the developer certificate file you receive from Apple into a PEM certificate file. Run the following command-line statement from the OpenSSL bin directory:
+
+    openssl x509 -in ios_development.cer -inform DER -out developer_identity.pem -outform PEM
+
+    2. If you are using the private key from the keychain on a Mac computer, convert it into a PEM key:
+
+    set RANDFILE=.rnd
+    openssl pkcs12 -nocerts -in mykey.p12 -out mykey.pem
+
+    3. You can now generate a valid P12 file, based on the key and the PEM version of the iPhone developer certificate:
+
+    openssl pkcs12 -export -inkey mykey.key -in developer_identity.pem -out iphone_dev.p12
+
+    (it will ask you for the password you set - it does nothing as you type - just type and hit enter)
+
+    If you are using a key from the Mac OS keychain, use the PEM version you generated in the previous step. Otherwise, use the OpenSSL key you generated earlier (on Windows).
+
+
+SIGNING KEYS IN PHONEGAP BUILD
+
+63. Review the instructions in the PhoneGap Build Docs
+
+64. This has been a complicated procedure and takes some getting used to for it to run smoothly
+
+65. You need to specify a signing key to PhoneGap Build in the Account > Edit > Signing Keys
+
+66. Specify and upload the Certificate P12 File (see Apple Files Part 2)
+
+67. Specify the Provisioning Profile you can download from apple (see step 41)
+
+68. Then unlock your key (press on key to unlock it)
+
+69. Back in the app section, press on your platform and specify the unlocked key
+
+70. This should build your app and provide you with an IPA file (for iOS) or APK (Android), etc.
+
+
+APPLE DEVICE
+
+71. Upload the Provisioning Profile to iTunes (drop it on your local app library)
+
+72. Upload your IPA file to iTunes (drop it on your local app library)
+
+73. Sync your files to your device and you should see your icon and run your app!
+
+
+
+DISTRIBUTING TO APPLE
+
+74. The Distribution Provisioning Profile combines the Distribution Certificate and App ID
+
+75. You then rebuild the PhoneGap Build with these for your final app package - IPA file
+
+76. You need to upload the final IPA to iTunes Connect using Application Uploader (Mac only - grumble)
+
+77. You also have to set 100 fields in iTunes Connect but those are pretty straight forward
+
+78. But do not worry about this last section for class
+
+
+ANDROID
+
+Android now needs a signing key which requires the Java SDK to be installed on your computer
+
+1. Look to download the Java SDK - for example here at this time:
+
+http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
+
+2. Get the SDK for your machine - download and install it - probably a couple hundred megabytes (sigh)
+
+3. Once you install it, open a command line as an administrator
+
+4. and cd until you find the bin director of the SDK (not normal Java but the SDK (there should be a keytool.exe in there)
+
+5. Then copy this line - but modify it to say your name as an alias (PhoneGap will ask you for this alias)
+
+keytool -genkey -v -keystore android.keystore -alias [alias_name] -keyalg RSA -keysize 2048 -validity 10000
+here is my name for example - but use yours:
+keytool -genkey -v -keystore android.keystore -alias danzen -keyalg RSA -keysize 2048 -validity 10000
+
+6. Then make up a password for the keystore and the key - can be the same - remember them  (PhoneGap will ask)
+
+This will make a keystore file in your bin directory
+
+7. When you go to PhoneGap Build, in the account under the keys tab add an Android keyCode
+
+8. Specify the file in your bin, the alias and the keystore and key passwords
+
+9. Unlock the key to the right in the account section still
+
+10. Go back to the apps section press the android button and use the key when building your app
+
+11. Then try the install via the QRCode or url it provides
+
+Or, copy the .APK file to your device.
+Use file manager to locate the file.
+Then click on it.
+Android App installer should be one of the options in pop-up.
+Select it and it installs.
+
+Or do a google search until it works!
