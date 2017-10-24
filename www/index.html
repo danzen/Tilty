@@ -37,8 +37,7 @@ frame.on("ready", function() {
     var stage = frame.stage;
     var stageW = frame.width;
     var stageH = frame.height;
-    frame.outerColor = "#444";
-    frame.color = "#ddd";
+    frame.color = frame.pink;
 
     // see http://zimjs.com/code/learn.html for video and code tutorials
     // see http://zimjs.com/code/docs.html for documentation
@@ -46,9 +45,15 @@ frame.on("ready", function() {
 
     // put your code here (you can delete this sample code)
 
-    var circle = new Circle(100, "orange");
+    var circle = new Circle(100, frame.blue);
     circle.center(stage).drag();
 
+    frame.on("resize", function() {
+        stageW = frame.width;
+        stageH = frame.height;
+        circle.center(stage);
+        stage.update();
+    });
 
     stage.update(); // this is needed to show any changes
 
